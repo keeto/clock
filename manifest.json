@@ -8,10 +8,8 @@
 	},
 	"AcceptedLinkTypes": [
 		"album",
-		"artist",
 		"playlist",
-		"track",
-		"user"
+		"track"
 	],
 	"SupportedLanguages": [
 		"en"

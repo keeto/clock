@@ -99,6 +99,17 @@ body {
 		border-color: #fff;
 	}
 
+.content.callout {
+	margin-top: -20px;
+}
+
+	.content.callout h1 {
+		font-size: 20px;
+		font-weight: normal;
+		text-align: center;
+		margin-bottom: 15px;
+		padding: 0;
+	}
 
 .hours {
 	width: 50px;

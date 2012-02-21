@@ -1,0 +1,19 @@
+{
+	"BundleType": "Application",
+	"AppName": {
+		"en": "Clock"
+	},
+	"AppIcon": {
+		"18x18": "images/icon/18x18.png"
+	},
+	"AcceptedLinkTypes": [
+		"album",
+		"artist",
+		"playlist",
+		"track",
+		"user"
+	],
+	"SupportedLanguages": [
+		"en"
+	]
+}

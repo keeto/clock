@@ -1,0 +1,80 @@
+html, body {
+	background: #292929;
+}
+
+body {
+	width: 700px;
+	margin: 40px auto;
+}
+
+
+.clock {
+	width: 700px;
+	height: 243px;
+	margin: 0 auto 100px auto;
+}
+	
+	.clock .clock-top {
+		width: 685px;
+		height: 21px;
+		margin: 0 auto;
+		background: url('../images/clock/top.png');
+	}
+		.clock .clock-top .switch-face {
+			border: 0;
+			display: block;
+			width: 58px;
+			height: 8px;
+			margin: 0 auto;
+			position: relative;
+			top: 4px;
+			background: url('../images/clock/top-button.png');
+		}
+
+	.clock .clock-frame {
+		width: 700px;
+		height: 230px;
+		background: url('../images/clock/frame.png');
+		position: relative;
+		top: -5px;
+	}
+
+		.clock .clock-frame .clock-inside {
+			width: 670px;
+			height: 200px;
+			background: url('../images/clock/inside.png');
+			position: absolute;
+			top: 15px;
+			left: 15px;
+			z-index: 5;
+		}
+			.clock .clock-frame .clock-inside .clock-face {
+				position: absolute;
+				top: 0;
+				z-index: 6;
+			}
+
+		.clock .clock-frame .clock-inside:before {
+			content: "";
+			display: block;
+			width: 670px;
+			height: 200px;
+			background: url('../images/clock/inner-shadow.png');
+			position: relative;
+			z-index: 7;
+		}
+
+.clock:after {
+	content: "";
+	display: block;
+	width: 698px;
+	height: 213px;
+	position: relative;
+	top: -140px;
+	background: url('../images/clock/drop-shadow.png');
+}
+
+
+#droparea {
+	display: none;
+}

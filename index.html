@@ -19,26 +19,57 @@
 		</div>
 	</div>
 
-	<div class="content callout">
+	<div class="content">
+
 		<div class="col sleep">
 			<h1>Fall asleep to music</h1>
-		</div>
-		<div class="col wake-up">
-			<h1>Wake up to music</h1>
-		</div>
-	</div>
 
-	<div class="content">
-		<div class="col sleep">
-		</div>
-		<div class="col wake-up">
-			<div class="options">
-			</div>
-		</div>
-	</div>
+			<fieldset class="time-format">
+				<button type="button" class="cbutton toggle">Time</button>
+				<button type="button" class="cbutton toggle active">Duration</button>
+			</fieldset>
 
-	<div class="content">
-		<div class="col sleep">
+			<fieldset class="time-values">
+				<label for="sleep-hours">Hours</label>
+				<select id="sleep-hours">
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+					<option value="21">21</option>
+					<option value="22">22</option>
+					<option value="23">23</option>
+				</select>
+				<label for="sleep-minutes">Minutes</label>
+				<select id="sleep-minutes">
+					<option value="0">0</option>
+					<option value="10">10</option>
+					<option value="20">20</option>
+					<option value="30">30</option>
+					<option value="40">40</option>
+					<option value="50">50</option>
+				</select>
+			</fieldset>
+
+			<button type="button" class="cbutton start-sleep">Start the music</button>
+
 			<div class="droparea">
 				<h1>Drop any music here</h1>
 				<p>Drag and drop a <b>playlist</b>, <b>album</b>, <b>artist</b> or <b>track</b> here to listen to it while falling asleep.</p>
@@ -46,11 +77,60 @@
 		</div>
 
 		<div class="col wake-up">
+			<h1>Wake up to music</h1>
+
+			<fieldset class="time-format">
+				<button type="button" class="cbutton toggle">Time</button>
+				<button type="button" class="cbutton toggle active">Duration</button>
+			</fieldset>
+
+			<fieldset class="time-values">
+				<label for="wake-hours">Hours</label>
+				<select id="wake-hours">
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+					<option value="21">21</option>
+					<option value="22">22</option>
+					<option value="23">23</option>
+				</select>
+				<label for="wake-minutes">Minutes</label>
+				<select id="wake-minutes">
+					<option value="0">0</option>
+					<option value="10">10</option>
+					<option value="20">20</option>
+					<option value="30">30</option>
+					<option value="40">40</option>
+					<option value="50">50</option>
+				</select>
+			</fieldset>
+
+			<button type="button" class="cbutton start-wake">Start the alarm</button>
+
 			<div class="droparea">
 				<h1>Drop any music here</h1>
 				<p>Drag and drop a <b>playlist</b>, <b>album</b>, <b>artist</b> or <b>track</b> here to wake up by it.</p>
 			</div>
 		</div>
+
 	</div>
 
 	<script src="js/ocanvas-2.0.0.min.js"></script>

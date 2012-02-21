@@ -9,6 +9,24 @@ body {
 }
 
 
+.cbutton {
+	border: 0;
+	background: -webkit-linear-gradient(#363636, #272727);
+	border-radius: 3px;
+	box-shadow: 0 2px 3px rgba(0,0,0,0.35);
+	color: #d5d5d5;
+	padding: 7px 15px;
+	font-size: 14px;
+}
+.cbutton:hover {
+	background: -webkit-linear-gradient(#3b3b3b, #2d2d2d);
+}
+.cbutton:active,
+.cbutton.active {
+	background: -webkit-linear-gradient(#1e1e1e, #2a2a2a);
+}
+
+
 .clock {
 	width: 700px;
 	height: 243px;
@@ -85,6 +103,17 @@ body {
 		width: 310px;
 		float: left;
 	}
+		.content .col > h1 {
+			font-size: 20px;
+			font-weight: normal;
+			text-align: center;
+			margin-bottom: 15px;
+			padding: 0;
+		}
+
+		.content fieldset {
+			margin: 20px 0;
+		}
 
 	.content .sleep {
 		margin-right: 50px;
@@ -117,18 +146,6 @@ body {
 
 	.content .droparea.target {
 		background-position: 0 -122px;
-	}
-
-.content.callout {
-	margin-top: -20px;
-}
-
-	.content.callout h1 {
-		font-size: 20px;
-		font-weight: normal;
-		text-align: center;
-		margin-bottom: 15px;
-		padding: 0;
 	}
 
 .hours {

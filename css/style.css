@@ -5,6 +5,7 @@ html, body {
 body {
 	width: 700px;
 	margin: 40px auto;
+	font: 14px/1.2 'Helvetica Neue', sans-serif;
 }
 
 
@@ -90,13 +91,32 @@ body {
 	}
 
 	.content .droparea {
-		border: 1px dashed #999;
-		border-radius: 10px;
-		padding: 15px;
+		width: 282px;
+		height: 92px;
+		padding: 15px 10px;
+		background: url('../images/droparea.png') 0 0;
+		text-align: center;
+		color: #9d9d9d;
 	}
+		.content .droparea h1 {
+			font-size: 20px;
+			font-weight: normal;
+			color: #e7e7e7;
+			margin: 10px 0 10px;
+			pointer-events: none;
+		}
+
+		.content .droparea p {
+			pointer-events: none;
+		}
+
+			.content .droparea b {
+				font-weight: bold;
+				color: #bdbdbd;
+			}
 
 	.content .droparea.target {
-		border-color: #fff;
+		background-position: 0 -122px;
 	}
 
 .content.callout {

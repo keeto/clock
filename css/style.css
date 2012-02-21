@@ -75,6 +75,26 @@ body {
 }
 
 
-#droparea {
-	display: none;
+
+.content {
+	overflow: hidden;
 }
+
+	.content .col {
+		width: 310px;
+		float: left;
+	}
+
+	.content .sleep {
+		margin-right: 50px;
+	}
+
+	.content .droparea {
+		border: 1px dashed #999;
+		border-radius: 10px;
+		padding: 15px;
+	}
+
+	.content .droparea.target {
+		border-color: #fff;
+	}

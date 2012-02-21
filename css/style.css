@@ -98,3 +98,34 @@ body {
 	.content .droparea.target {
 		border-color: #fff;
 	}
+
+
+.hours {
+	width: 50px;
+}
+
+.dropdown {
+	background: #fff;
+	color: #000;
+}
+
+.dropdown-values {
+	display: none;
+	background: #fff;
+	color: #000;
+	position: absolute;
+	overflow: auto;
+	height: 100px;
+}
+
+.dropdown-values.selecting {
+	display: block;
+}
+
+.dropdown-values li.selecting, .dropdown-values li:hover {
+	background: #999 !important;
+}
+
+.dropdown-values li.selected {
+	background: #ccc;
+}

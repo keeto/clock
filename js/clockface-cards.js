@@ -36,7 +36,7 @@ var clockFace = {
 		this.lastDate = { h: hours, min: minutes };
 		hours = this.getSplitDigits(hours);
 		minutes = this.getSplitDigits(minutes);
-		digits = [hours[0], hours[1], minutes[0], minutes[1]];
+		var digits = [hours[0], hours[1], minutes[0], minutes[1]];
 
 		for (c = 0; c < 4; c++) {
 			for (r = 0; r < 2; r++) {
@@ -107,8 +107,8 @@ var clockFace = {
 	},
 
 	getSplitDigits: function (input) {
-		digit1 = input < 10 ? 0 : (input - input % 10) / 10;
-		digit2 = input < 10 ? input : input % 10;
+		var digit1 = input < 10 ? 0 : (input - input % 10) / 10;
+		var digit2 = input < 10 ? input : input % 10;
 		return [digit1, digit2];
 	},
 

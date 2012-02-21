@@ -4,8 +4,8 @@ exports.setup = function(sp, models, app){
 	// Drag and Drop
 	var Player = window.Player = {
 
-		_wakeupPlaylist: '',
-		_sleepPlaylist: '',
+		_wakeupSource: '',
+		_sleepSource: '',
 
 		_wakeupTimer: null,
 		_sleepTimer: null,
@@ -45,12 +45,12 @@ exports.setup = function(sp, models, app){
 
 		onDropSleep: function(e){
 			if (e.stopPropagation) e.stopPropagation();
-			this._sleepPlaylist = e.dataTransfer.getData('text');
+			this._sleepSource = e.dataTransfer.getData('text');
 		},
 
 		onDropWake: function(e){
 			if (e.stopPropagation) e.stopPropagation();
-			this._wakeupPlaylist = e.dataTransfer.getData('text');
+			this._wakeupSource = e.dataTransfer.getData('text');
 		},
 
 		setWake: function(hours, minutes){
@@ -66,7 +66,7 @@ exports.setup = function(sp, models, app){
 		},
 
 		play: function(){
-			var playlist = models.Playlist.fromURI(this._wakeupPlaylist);
+			var playlist = models.Playlist.fromURI(this._wakeupSource);
 			player.play(playlist.get(0), playlist, 0);
 			return this;
 		},

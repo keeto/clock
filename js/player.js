@@ -148,6 +148,7 @@ exports.setup = function(sp, models, views, app){
 			}
 
 			clearTimeout(this._sleepTimer);
+			if (this._sleepSource) this.play(this._sleepSource);
 			this._sleepTimer = setTimeout(this.stop.bind(this), timestamp);
 			return this;
 		},

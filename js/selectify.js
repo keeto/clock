@@ -7,6 +7,7 @@ var selectify = {
 
 		for (var i = 0; i < elems.length; i++) {
 			elems[i].addEventListener('change', this.change.bind(this, elems[i]), false);
+			this.change(elems[i]);
 		}
 	},
 

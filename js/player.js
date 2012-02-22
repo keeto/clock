@@ -11,7 +11,7 @@ exports.setup = function(sp, models, views, app){
 		_wakeupTimer: null,
 		_sleepTimer: null,
 
-		_wakeupTimeMode: 'duration',
+		_wakeupTimeMode: 'time',
 		_sleepTimeMode: 'duration',
 
 		init: function(){

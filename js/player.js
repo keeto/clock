@@ -20,8 +20,8 @@ exports.setup = function(sp, models, views, app){
 
 		attach: function(){
 			// mode toggles
-			var sleepContainer = document.querySelector('.col.sleep'),
-				wakeupContainer = document.querySelector('.col.wake-up');
+			var sleepContainer = this._sleepContainer = document.querySelector('.col.sleep'),
+				wakeupContainer = this._wakeupContainer = document.querySelector('.col.wake-up');
 
 			var toggle = sleepContainer.querySelectorAll('.toggle');
 			toggle[0].addEventListener('click', utils.rebind(this.toggleMode, this, 'sleep', 'time', toggle[1]));
@@ -118,39 +118,74 @@ exports.setup = function(sp, models, views, app){
 		},
 
 		setWake: function(self, e){
-			var values = this._wakeValues,
-				hours = parseInt(values.hours.value, 10),
-				minutes = parseInt(values.mins.value, 10),
-				timestamp = 0;
-
-			if (this._wakeupTimeMode == 'duration'){
-				timestamp = this.ms(hours + 'h') + this.ms(minutes + 'm');
-			} else {
-				timestamp = this.calculateTimeDiff(hours, minutes);
-			}
-
 			clearTimeout(this._wakeupTimer);
-			this._wakeupTimer = setTimeout(this.play.bind(this, this._wakeupSource), timestamp);
+			if (self.classList.contains('start')){
+				var values = this._wakeValues,
+					hours = parseInt(values.hours.value, 10),
+					minutes = parseInt(values.mins.value, 10),
+					timestamp = 0;
+
+				if (this._wakeupTimeMode == 'duration'){
+					timestamp = this.ms(hours + 'h') + this.ms(minutes + 'm');
+				} else {
+					timestamp = this.calculateTimeDiff(hours, minutes);
+				}
+
+				this._wakeupTimer = setTimeout(function(){
+					this.play(this._wakeupSource);
+					this.toggleButtonState(self, 'start', 'alarm');
+					this.enableControls(this._wakeupContainer);
+				}.bind(this), timestamp);
+				this.toggleButtonState(self, 'stop', 'alarm');
+				this.disableControls(this._wakeupContainer);
+			} else {
+				this.toggleButtonState(self, 'start', 'alarm');
+				this.enableControls(this._wakeupContainer);
+			}
 			return this;
 		},
 
 		setSleep: function(self, e){
-			var values = this._sleepValues,
-				hours = parseInt(values.hours.value, 10),
-				minutes = parseInt(values.mins.value, 10),
-				timestamp = 0;
-
-
-			if (this._sleepTimeMode == 'duration'){
-				timestamp = this.ms(hours + 'h') + this.ms(minutes + 'm');
-			} else {
-				timestamp = this.calculateTimeDiff(hours, minutes);
-			}
-
 			clearTimeout(this._sleepTimer);
-			if (this._sleepSource) this.play(this._sleepSource);
-			this._sleepTimer = setTimeout(this.stop.bind(this), timestamp);
+			if (self.classList.contains('start')){
+				var values = this._sleepValues,
+					hours = parseInt(values.hours.value, 10),
+					minutes = parseInt(values.mins.value, 10),
+					timestamp = 0;
+
+
+				if (this._sleepTimeMode == 'duration'){
+					timestamp = this.ms(hours + 'h') + this.ms(minutes + 'm');
+				} else {
+					timestamp = this.calculateTimeDiff(hours, minutes);
+				}
+
+				if (this._sleepSource) this.play(this._sleepSource);
+				this._sleepTimer = setTimeout(function(){
+					this.stop();
+					this.toggleButtonState(self, 'start', 'music');
+					this.enableControls(this._sleepContainer);
+				}.bind(this), timestamp);
+				this.toggleButtonState(self, 'stop', 'music');
+				this.disableControls(this._sleepContainer);
+			} else {
+				this.stop();
+				this.toggleButtonState(self, 'start', 'music');
+				this.enableControls(this._sleepContainer);
+			}
 			return this;
+		},
+
+		toggleButtonState: function(self, mode, what){
+			if (mode == 'stop'){
+				self.classList.remove('start');
+				self.classList.add('stop');
+				self.innerText = 'Stop the ' + what;
+			} else {
+				self.classList.remove('stop');
+				self.classList.add('start');
+				self.innerText = 'Start the ' + what;
+			}
 		},
 
 		getSourceObject: function(source, callback){

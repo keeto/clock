@@ -118,6 +118,11 @@ body {
 			overflow: hidden;
 			margin: 20px 0;
 		}
+		.content .form.disabled,
+		.content .droparea.disabled {
+			pointer-events: none;
+			opacity: 0.3;
+		}
 		.content fieldset {
 			float: left;
 			text-align: left;

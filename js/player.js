@@ -225,6 +225,16 @@ exports.setup = function(sp, models, views, app){
 				numTracks = source.isSingleTrack ? 1 : source.length;
 				numtracks.innerHTML = numTracks + (numTracks === 1 ? ' track' : ' tracks');
 			});
+		},
+
+		enableControls: function(container){
+			container.querySelector('.form').classList.remove('disabled');
+			container.querySelector('.droparea').classList.remove('disabled');
+		},
+
+		disableControls: function(container){
+			container.querySelector('.form').classList.add('disabled');
+			container.querySelector('.droparea').classList.add('disabled');
 		}
 
 	};

@@ -26,7 +26,10 @@ exports.setup = function(sp, models, views, app){
 			var toggle = sleepContainer.querySelectorAll('.toggle');
 			toggle[0].addEventListener('click', utils.rebind(this.toggleMode, this, 'sleep', 'time', toggle[1]));
 			toggle[1].addEventListener('click', utils.rebind(this.toggleMode, this, 'sleep', 'duration', toggle[0]));
-			sleepContainer.querySelector('.start-sleep').addEventListener('click', utils.rebind(this.setSleep, this));
+
+			var sleepStart = this._sleepStart = sleepContainer.querySelector('.start-sleep');
+			sleepStart.addEventListener('click', utils.rebind(this.setSleep, this));
+
 			this._sleepValues = {
 				hours: document.getElementById('sleep-hours'),
 				mins: document.getElementById('sleep-minutes')
@@ -35,7 +38,10 @@ exports.setup = function(sp, models, views, app){
 			toggle = wakeupContainer.querySelectorAll('.toggle');
 			toggle[0].addEventListener('click', utils.rebind(this.toggleMode, this, 'wakeup', 'time', toggle[1]));
 			toggle[1].addEventListener('click', utils.rebind(this.toggleMode, this, 'wakeup', 'duration', toggle[0]));
-			wakeupContainer.querySelector('.start-wake').addEventListener('click', utils.rebind(this.setWake, this));
+
+			var wakeupStart = this._wakeupStart = wakeupContainer.querySelector('.start-wake');
+			wakeupStart.addEventListener('click', utils.rebind(this.setWake, this));
+
 			this._wakeValues = {
 				hours: document.getElementById('wake-hours'),
 				mins: document.getElementById('wake-minutes')
@@ -89,6 +95,7 @@ exports.setup = function(sp, models, views, app){
 			this._sleepSource = e.dataTransfer.getData('text');
 			this.showMusicInfo(self, this._sleepSource);
 			self.classList.remove('target');
+			this._sleepStart.disabled = false;
 		},
 
 		onDropWake: function(self, e){
@@ -96,6 +103,7 @@ exports.setup = function(sp, models, views, app){
 			this._wakeupSource = e.dataTransfer.getData('text');
 			this.showMusicInfo(self, this._wakeupSource);
 			self.classList.remove('target');
+			this._wakeupStart.disabled = false;
 		},
 
 		toggleMode: function(self, which, mode, other){

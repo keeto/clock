@@ -5,6 +5,7 @@ html, body {
 body {
 	width: 700px;
 	margin: 40px auto;
+	padding-bottom: 20px;
 	font: 14px/1.2 'Helvetica Neue', sans-serif;
 }
 
@@ -285,4 +286,15 @@ body {
 
 	.content .droparea.target {
 		background-position: 0 -122px;
+	}
+
+
+	.notice {
+		margin: 20px 0 0 10px;
+		padding: 0 20px;
+		background: rgba(0,0,0,0.08);
+		line-height: 40px;
+		border-radius: 20px;
+		width: 644px;
+		color: #5d5d5d;
 	}

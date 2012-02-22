@@ -1,6 +1,7 @@
-exports.setup = function(sp, models, app){
+exports.setup = function(sp, models, views, app){
 	var player = models.player,
-		Link = models.Link;
+		Link = models.Link,
+		_Image = views.Image;
 	
 	var Player = window.Player = {
 
@@ -63,7 +64,6 @@ exports.setup = function(sp, models, app){
 			_.h = _.m * 60;
 			_.d = _.h * 24;
 			return function ms(s) {
-				console.log(s);
 				if (s == Number(s)) return Number(s);
 				r.exec(s.toLowerCase());
 				return RegExp.$1 * _[RegExp.$2];
@@ -87,12 +87,14 @@ exports.setup = function(sp, models, app){
 		onDropSleep: function(self, e){
 			if (e.stopPropagation) e.stopPropagation();
 			this._sleepSource = e.dataTransfer.getData('text');
+			this.showMusicInfo(self, this._sleepSource);
 			self.classList.remove('target');
 		},
 
 		onDropWake: function(self, e){
 			if (e.stopPropagation) e.stopPropagation();
 			this._wakeupSource = e.dataTransfer.getData('text');
+			this.showMusicInfo(self, this._wakeupSource);
 			self.classList.remove('target');
 		},
 
@@ -150,7 +152,7 @@ exports.setup = function(sp, models, app){
 			return this;
 		},
 
-		play: function(source){
+		getSourceObject: function(source, callback){
 			switch (Link.getType(source)){
 				case Link.TYPE.ALBUM:
 					source = models.Album.fromURI(source);
@@ -163,19 +165,65 @@ exports.setup = function(sp, models, app){
 					source = new models.Playlist();
 					source.add(_temp);
 					source.add(_temp);
+					source.isSingleTrack = true;
 				break;
 				default:
 					source = null;
 			}
-				
-			player.repeat = true;
-			player.play(source.get(0), source, 0);
+
+			if (source !== null) {
+				if (source.loaded) {
+					if (source.isSingleTrack) {
+						source.trackName = source.get(0).name;
+					}
+					callback(source);
+				} else {
+					source.observe(models.EVENT.LOAD, function handler(){
+						if (source.isSingleTrack) {
+							source.trackName = source.get(0).name;
+						}
+						callback(source);
+						source.ignore(models.EVENT.LOAD, handler);
+					});
+				}
+			}
+
+			return source;
+		},
+
+		play: function(source){
+			this.getSourceObject(source, function (source) {
+				player.repeat = true;
+				player.play(source.get(0), source, 0);
+			});
 			return this;
 		},
 
 		stop: function(){
 			player.playing = false;
 			return this;
+		},
+
+		showMusicInfo: function(dropElement, source){
+			this.getSourceObject(source, function(source){
+				var instructions, music, image, title, numtracks, numTracks;
+
+				instructions = dropElement.querySelector('.instructions');
+				instructions.classList.add('hidden');
+				music = dropElement.querySelector('.music');
+				music.classList.remove('hidden');
+
+				image = new _Image(source.image).node;
+				music.querySelector('.image').innerHTML = '';
+				music.querySelector('.image').appendChild(image);
+
+				title = music.querySelector('.title');
+				title.innerHTML = source.isSingleTrack ? source.trackName : source.name;
+
+				numtracks = music.querySelector('.numtracks');
+				numTracks = source.isSingleTrack ? 1 : source.length;
+				numtracks.innerHTML = numTracks + (numTracks === 1 ? ' track' : ' tracks');
+			});
 		}
 
 	};

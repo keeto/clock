@@ -223,17 +223,54 @@ body {
 		text-align: center;
 		color: #9d9d9d;
 		margin-top: 20px;
+		position: relative;
 	}
+		.content .droparea .instructions,
+		.content .droparea .music {
+			pointer-events: none;
+		}
+		.content .droparea .music {
+			text-align: left;
+		}
+		.content .droparea .instructions.hidden,
+		.content .droparea .music.hidden {
+			display: none;
+		}
+			.content .droparea .music .image,
+			.content .droparea .music .sp-image {
+				width: 64px;
+				height: 64px;
+			}
+			.content .droparea .music .image {
+				top: 30px;
+				left: 30px;
+				position: absolute;
+			}
+				.content .droparea .music .sp-image {
+					border-radius: 3px;
+				}
+				.content .droparea .music .title {
+					position: absolute;
+					top: 30px;
+					left: 104px;
+					font-size: 16px;
+					color: #eee;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+					width: 178px;
+				}
+				.content .droparea .music .numtracks {
+					position: absolute;
+					top: 52px;
+					left: 104px;
+					font-size: 12px;
+				}
 		.content .droparea h1 {
 			font-size: 20px;
 			font-weight: normal;
 			color: #e7e7e7;
 			margin: 10px 0 10px;
-			pointer-events: none;
-		}
-
-		.content .droparea p {
-			pointer-events: none;
 		}
 
 			.content .droparea b {

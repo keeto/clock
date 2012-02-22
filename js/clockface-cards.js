@@ -50,6 +50,9 @@ var clockFace = {
 			}
 		}
 
+		window.addEventListener('focus', function () {
+			clockFace.forceUpdate();
+		}, false);
 
 	},
 
@@ -87,6 +90,26 @@ var clockFace = {
 
 		this.lastDate = { h: hours, min: minutes, s: seconds, m: month, y: year };
 
+		this.canvas.redraw();
+	},
+
+	forceUpdate: function () {
+		var cards = this.cards;
+		var c, r, clone, i;
+
+		var date = new Date();
+		var hours = date.getHours();
+		var minutes = date.getMinutes();
+		this.lastDate = { h: hours, min: minutes };
+		hours = this.getSplitDigits(hours);
+		minutes = this.getSplitDigits(minutes);
+		var digits = [hours[0], hours[1], minutes[0], minutes[1]];
+
+		for (i = 0; i < 8; i++) {
+			c = parseInt(i / 2);
+			r = i % 2;
+			cards[i].children[0].text = this.getDigit(cards[i], c < 2 ? date.getHours() : date.getMinutes(), c, digits[c] + r);
+		}
 		this.canvas.redraw();
 	},
 

@@ -16,6 +16,7 @@ exports.setup = function(sp, models, views, app){
 
 		init: function(){
 			this.attach();
+			this.readState();
 		},
 
 		attach: function(){
@@ -62,6 +63,60 @@ exports.setup = function(sp, models, views, app){
 			}
 		},
 
+		clearState: function(){
+			localStorage['clock-state'] = null;
+			return this;
+		},
+
+		readState: function(){
+			var data = JSON.parse(localStorage['clock-state'] || 'null');
+			if (!data) return this;
+			var source = this._wakeupSource = data._wakeupSource;
+			if (source){
+				this.showMusicInfo(this._wakeupContainer.querySelector('.droparea'), source);
+				this._wakeupStart.disabled = false;
+			}
+
+			source = this._sleepSource = data._sleepSource;
+			if (source){
+				this.showMusicInfo(this._sleepContainer.querySelector('.droparea'), source);
+				this._sleepStart.disabled = false;
+			}
+
+			var mode = this._wakeupTimeMode = data._wakeupTimeMode;
+			var toggle = this._wakeupContainer.querySelectorAll('.toggle');
+			toggle[mode == 'time' ? '0' : '1'].classList.add('active');
+			toggle[mode == 'time' ? '1' : '0'].classList.remove('active');
+
+			mode = this._sleepTimeMode = data._sleepTimeMode;
+			toggle = this._sleepContainer.querySelectorAll('.toggle');
+			toggle[mode == 'time' ? '0' : '1'].classList.add('active');
+			toggle[mode == 'time' ? '1' : '0'].classList.remove('active');
+
+			this._wakeValues.hours.value = data._wakeupHours;
+			this._wakeValues.mins.value = data._wakeupMinutes;
+
+			this._sleepValues.hours.value = data._sleepHours;
+			this._sleepValues.mins.value = data._sleepMinutes;
+		},
+
+		flushState: function(){
+			if (this._flushTimer) clearTimeout(this._flushTimer);
+			var data = JSON.stringify({
+				_wakeupSource: this._wakeupSource,
+				_sleepSource: this._sleepSource,
+				_wakeupTimeMode: this._wakeupTimeMode,
+				_sleepTimeMode: this._sleepTimeMode,
+				_wakeupHours: this._wakeValues.hours.value,
+				_wakeupMinutes: this._wakeValues.mins.value,
+				_sleepHours: this._sleepValues.hours.value,
+				_sleepMinutes: this._sleepValues.mins.value
+			});
+			this._flushTimer = setTimeout(function(){
+				localStorage['clock-state'] = data;
+			}, 10);
+		},
+
 		ms: (function(){
 			var r = /(\d*.?\d+)([mshd]+)/, _ = {};
 			_.ms = 1;
@@ -96,6 +151,7 @@ exports.setup = function(sp, models, views, app){
 			this.showMusicInfo(self, this._sleepSource);
 			self.classList.remove('target');
 			this._sleepStart.disabled = false;
+			this.flushState();
 		},
 
 		onDropWake: function(self, e){
@@ -104,12 +160,14 @@ exports.setup = function(sp, models, views, app){
 			this.showMusicInfo(self, this._wakeupSource);
 			self.classList.remove('target');
 			this._wakeupStart.disabled = false;
+			this.flushState();
 		},
 
 		toggleMode: function(self, which, mode, other){
 			this['_' + which + 'TimeMode' ] = mode;
 			other.classList.remove('active');
 			self.classList.add('active');
+			this.flushState();
 			return this;
 		},
 
@@ -150,6 +208,7 @@ exports.setup = function(sp, models, views, app){
 				this.toggleButtonState(self, 'start', 'alarm');
 				this.enableControls(this._wakeupContainer);
 			}
+			this.flushState();
 			return this;
 		},
 
@@ -181,6 +240,7 @@ exports.setup = function(sp, models, views, app){
 				this.toggleButtonState(self, 'start', 'music');
 				this.enableControls(this._sleepContainer);
 			}
+			this.flushState();
 			return this;
 		},
 

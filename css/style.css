@@ -15,7 +15,7 @@ body {
 	border-radius: 3px;
 	box-shadow: 0 2px 3px rgba(0,0,0,0.35);
 	color: #d5d5d5;
-	padding: 7px 15px;
+	padding: 7px 12px;
 	font-size: 14px;
 }
 .cbutton:hover {
@@ -125,8 +125,60 @@ body {
 			.content fieldset .form-item {
 				float: left;
 			}
+			.content .time-format {
+				margin-right: 16px;
+			}
 			.content fieldset label {
 				display: block;
+				margin-bottom: 5px;
+			}
+
+			.content .styled-select {
+				display: inline-block;
+				position: relative;
+				width: 65px;
+				height: 30px;
+				box-shadow: 0 2px 3px rgba(0,0,0,0.35);
+			}
+			.content .form-item:first-child .styled-select {
+				margin-right: 8px;
+			}
+			.content .styled-select select {
+				opacity: 0;
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				-webkit-appearance: none;
+			}
+			.content .styled-select .styled-select-value {
+				position: absolute;
+				top: 0;
+				left: 0;
+				background: #1e1e1e;
+				box-shadow: inset 0 2px 3px rgba(0,0,0,0.35);
+				color: #d5d5d5;
+				display: inline-block;
+				width: 37px;
+				height: 30px;
+				line-height: 30px;
+				text-align: center;
+				border-radius: 3px 0 0 3px;
+			}
+			.content .styled-select .styled-select-button {
+				position: absolute;
+				top: 0;
+				left: 37px;
+				display: inline-block;
+				width: 28px;
+				height: 30px;
+				padding: 0;
+				border-radius: 0 3px 3px 0;
+				box-shadow: none;
+				text-align: center;
+				line-height: 30px;
+				color: #7e7e7e;
 			}
 
 		.content .start {
@@ -192,33 +244,3 @@ body {
 	.content .droparea.target {
 		background-position: 0 -122px;
 	}
-
-.hours {
-	width: 50px;
-}
-
-.dropdown {
-	background: #fff;
-	color: #000;
-}
-
-.dropdown-values {
-	display: none;
-	background: #fff;
-	color: #000;
-	position: absolute;
-	overflow: auto;
-	height: 100px;
-}
-
-.dropdown-values.selecting {
-	display: block;
-}
-
-.dropdown-values li.selecting, .dropdown-values li:hover {
-	background: #999 !important;
-}
-
-.dropdown-values li.selected {
-	background: #ccc;
-}

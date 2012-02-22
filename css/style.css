@@ -97,11 +97,14 @@ body {
 
 .content {
 	overflow: hidden;
+	width: 664px;
+	margin: 0 auto;
 }
 
 	.content .col {
-		width: 310px;
+		width: 302px;
 		float: left;
+		text-align: center;
 	}
 		.content .col > h1 {
 			font-size: 20px;
@@ -111,12 +114,53 @@ body {
 			padding: 0;
 		}
 
-		.content fieldset {
+		.content .form {
+			overflow: hidden;
 			margin: 20px 0;
+		}
+		.content fieldset {
+			float: left;
+			text-align: left;
+		}
+			.content fieldset .form-item {
+				float: left;
+			}
+			.content fieldset label {
+				display: block;
+			}
+
+		.content .start {
+			background: -webkit-linear-gradient(#4c7422, #304916);
+			margin: 0 auto;
+		}
+		.content .start:hover {
+			background: -webkit-linear-gradient(#517927, #354e1b);
+		}
+		.content .start:active,
+		.content .start.active {
+			background: -webkit-linear-gradient(#304916, #3c6412);
+		}
+
+		.content .stop {
+			background: -webkit-linear-gradient(#742222, #4a1616);
+			margin: 0 auto;
+		}
+		.content .stop:hover {
+			background: -webkit-linear-gradient(#792727, #4f1b1b);
+		}
+		.content .stop:active,
+		.content .stop.active {
+			background: -webkit-linear-gradient(#4a1616, #641212);
+		}
+
+		.content .start[disabled] {
+			background: -webkit-linear-gradient(#667458, #414937);
+			margin: 0 auto;
+			color: #8e9886;
 		}
 
 	.content .sleep {
-		margin-right: 50px;
+		margin-right: 60px;
 	}
 
 	.content .droparea {
@@ -126,6 +170,7 @@ body {
 		background: url('../images/droparea.png') 0 0;
 		text-align: center;
 		color: #9d9d9d;
+		margin-top: 20px;
 	}
 		.content .droparea h1 {
 			font-size: 20px;
